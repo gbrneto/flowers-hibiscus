@@ -12,6 +12,12 @@ import { CustomerReviewsSection } from "@/components/customer-reviews-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { OurStorySection } from "@/components/our-story-section"
 import { Footer } from "@/components/footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Versia Garden - Premium Hibiscus Plants",
+  description: "High-quality hibiscus plants with guaranteed germination",
+}
 
 export default function Home() {
   return (

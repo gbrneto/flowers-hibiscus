@@ -12,6 +12,12 @@ import { CustomerReviewsSection } from "@/components/it/customer-reviews-section
 import { TestimonialsSection } from "@/components/it/testimonials-section"
 import { OurStorySection } from "@/components/it/our-story-section"
 import { Footer } from "@/components/it/footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Versia Garden - Piante di Ibisco Premium",
+  description: "Piante di ibisco di alta qualità con germinazione garantita",
+}
 
 export default function ItalianPage() {
   return (
