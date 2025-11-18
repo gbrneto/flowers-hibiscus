@@ -7,11 +7,18 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { customerId, priceId } = await request.json()
+    const { customerId, priceId, amountInCents, currency } = await request.json()
 
     if (!customerId || !priceId) {
       return NextResponse.json(
         { error: "Missing required fields: customerId or priceId" },
+        { status: 400 }
+      )
+    }
+
+    if (!amountInCents || !currency) {
+      return NextResponse.json(
+        { error: "Missing required fields: amountInCents or currency" },
         { status: 400 }
       )
     }
@@ -32,10 +39,9 @@ export async function POST(request: NextRequest) {
     const paymentMethodId = paymentMethods.data[0].id
 
     // Create a payment intent for the one-time charge
-    // Amount is 994 pence = £9.94
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 994,
-      currency: "gbp",
+      amount: amountInCents,
+      currency: currency,
       customer: customerId,
       payment_method: paymentMethodId,
       off_session: true,
