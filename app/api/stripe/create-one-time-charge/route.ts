@@ -38,7 +38,6 @@ export async function POST(request: NextRequest) {
 
     const paymentMethodId = paymentMethods.data[0].id
 
-    // Create a payment intent for the one-time charge
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: currency,

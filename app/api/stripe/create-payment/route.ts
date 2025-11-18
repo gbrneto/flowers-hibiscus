@@ -35,13 +35,14 @@ export async function POST(request: NextRequest) {
     }
 
     const stripe = new Stripe(stripeSecretKey, { apiVersion: "2024-06-20" })
-    const { paymentMethodId, customerData, amountInCents, currency } = await request.json()
+    const { paymentMethodId, customerData, amountInCents, currency, locale } = await request.json()
 
     console.log("[v0] Payment request:", {
       currency,
       amountInCents,
       customerEmail: customerData.email,
       country: customerData.country,
+      locale,
     })
 
     // Validate if the sent currency is supported
@@ -105,7 +106,8 @@ export async function POST(request: NextRequest) {
       console.log("[v0] Skipping one-time payment (amount is 0)")
     }
 
-    const redirectUrl = `${appUrl}/upsell1?email=${encodeURIComponent(customerData.email)}&customer=${customer.id}`
+    const upsellPath = locale === 'it' ? '/it/upsell1' : '/upsell1'
+    const redirectUrl = `${appUrl}${upsellPath}?email=${encodeURIComponent(customerData.email)}&customer=${customer.id}`
     console.log("[v0] Success! Redirecting to:", redirectUrl)
 
     return NextResponse.json({

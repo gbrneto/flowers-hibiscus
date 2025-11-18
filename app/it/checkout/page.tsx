@@ -167,6 +167,7 @@ function CheckoutForm() {
         paymentMethodId: paymentMethod.id,
         amountInCents: Math.round(total * 100),
         currency: 'eur',
+        locale: 'it', // Added locale parameter for Italian checkout
         customerData: {
           email,
           firstName,
@@ -488,6 +489,7 @@ function CheckoutForm() {
             paymentMethodId: ev.paymentMethod.id,
             amountInCents: Math.round(total * 100),
             currency: 'eur',
+            locale: 'it', // Added locale parameter for Italian Google Pay
             customerData: {
               email: ev.payerEmail,
               firstName: ev.payerName?.split(" ")[0] || "",

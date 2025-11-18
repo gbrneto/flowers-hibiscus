@@ -119,6 +119,8 @@ export default function Upsell2Page() {
         body: JSON.stringify({
           customerId: customer,
           priceId: "price_HIBISCUS_KIT_PLACEHOLDER",
+          amountInCents: 994, // Sending £9.94 amount
+          currency: "gbp" // Sending GBP currency
         }),
       })
 

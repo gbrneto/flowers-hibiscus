@@ -119,8 +119,8 @@ export default function Upsell2PageIT() {
         body: JSON.stringify({
           customerId: customer,
           priceId: "price_EUR_UPSELL2_PLACEHOLDER",
-          amountInCents: 994,
-          currency: "eur"
+          amountInCents: 994, // Sending €9.94 amount
+          currency: "eur" // Sending EUR currency
         }),
       })
 
