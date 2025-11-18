@@ -39,7 +39,7 @@ export function TechnicalDataSection() {
             <div className="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200">
               <div className="p-4 font-semibold bg-gray-50">Flower Colors</div>
               <div className="p-4 md:col-span-2">
-                Our kits contain seeds for rare varieties with exotic and vibrant color combinations.
+                Our kits contain healthy young plants of rare varieties with exotic and vibrant color combinations.
               </div>
             </div>
 

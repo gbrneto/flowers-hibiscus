@@ -14,23 +14,23 @@ const testimonials = [
   },
   {
     name: "Linda T",
-    text: "Non sono un giardiniere professionista, ma questi semi mi hanno fatto sembrare uno! 🎉 I petali doppi sono così unici. Li adoro!",
+    text: "Non sono un giardiniere professionista, ma queste piantine mi hanno fatto sembrare uno! 🎉 I petali doppi sono così unici. Li adoro!",
   },
   {
     name: "Julian N",
-    text: "Ho preso una chance con questi semi rari e sono entusiasta. 🌺 Hanno aggiunto un tocco di magia al mio balcone. Ne ordinerò altri!",
+    text: "Ho preso una chance con queste piante rare e sono entusiasta. 🌺 Hanno aggiunto un tocco di magia al mio balcone. Ne ordinerò altri!",
   },
   {
     name: "Nicolas V",
-    text: "Questi semi sono la vera cosa! 🌈 I colori sono così vividi. Il mio giardino ora è il mio posto preferito per rilassarmi.",
+    text: "Queste piante sono la vera cosa! 🌈 I colori sono così vividi. Il mio giardino ora è il mio posto preferito per rilassarmi.",
   },
   {
     name: "Nathalie p",
-    text: "🌸 Questi semi rari sono un game-changer! Li ho piantati nel mio cortile e ora è un paradiso fiorito. Così facili da coltivare—anche io non ho fatto pasticci!",
+    text: "🌸 Queste piante rare sono un game-changer! Le ho piantate nel mio cortile e ora è un paradiso fiorito. Così facili da coltivare—anche io non ho fatto pasticci!",
   },
   {
     name: "Francesca I",
-    text: "Appena ricevuto i miei semi. 🌺 Non vedo l'ora di vedere queste bellezze nel mio giardino. I miei vicini saranno così gelosi!",
+    text: "Appena ricevuto le mie piantine. 🌺 Non vedo l'ora di vedere queste bellezze nel mio giardino. I miei vicini saranno così gelosi!",
   },
   {
     name: "Daniel G",
@@ -46,11 +46,11 @@ const testimonials = [
   },
   {
     name: "Claudia O",
-    text: "Questo è il mio terzo acquisto e c'è una ragione per cui continuo a tornare. I semi sono costantemente di alta qualità e il tasso di germinazione è il migliore che ho trovato. Altamente raccomandato.",
+    text: "Questo è il mio terzo acquisto e c'è una ragione per cui continuo a tornare. Le piante sono costantemente di alta qualità e il tasso di crescita è il migliore che ho trovato. Altamente raccomandato.",
   },
   {
     name: "Valérie G",
-    text: "Semi fantastici, fiori bellissimi. Già al mio terzo ordine da loro.",
+    text: "Piante fantastiche, fiori bellissimi. Già al mio terzo ordine da loro.",
   },
 ]
 

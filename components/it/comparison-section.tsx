@@ -8,6 +8,7 @@ export function ComparisonSection() {
     "Supporto Clienti 24/7",
     "Pagamento 100% Sicuro Con Crittografia SSL",
     "Guida alla Germinazione con Istruzioni Passo-Passo",
+    "Guida alla Piantagione e Cura con Istruzioni Passo-Passo",
   ]
 
   return (

@@ -1,6 +1,6 @@
 "use client"
 
-import { Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from "react"
 
 const testimonials = [
@@ -14,23 +14,23 @@ const testimonials = [
   },
   {
     name: "Linda T",
-    text: "I'm not a pro gardener, but these seeds made me look like one! 🎉 The double petals are so unique. Love them!",
+    text: "I'm not a pro gardener, but these plants made me look like one! 🎉 The double petals are so unique. Love them!",
   },
   {
     name: "Julian N",
-    text: "Took a chance on these rare seeds, and I'm thrilled. 🌺 They've added a touch of magic to my balcony. Ordering more!",
+    text: "Took a chance on these rare plants, and I'm thrilled. 🌺 They've added a touch of magic to my balcony. Ordering more!",
   },
   {
     name: "Nicolas V",
-    text: "These seeds are the real deal! 🌈 The colors are so vivid. My garden is now my favorite place to relax.",
+    text: "These plants are the real deal! 🌈 The colors are so vivid. My garden is now my favorite place to relax.",
   },
   {
     name: "Nathalie p",
-    text: "🌸 These rare seeds are a game-changer! Planted them in my backyard, and now it's a blooming paradise. So easy to grow—even I didn't mess it up!",
+    text: "🌸 These rare plants are a game-changer! Planted them in my backyard, and now it's a blooming paradise. So easy to grow—even I didn't mess it up!",
   },
   {
     name: "Francesca I",
-    text: "Just received my seeds. 🌺 Can't wait to see these beauties in my garden. My neighbors are gonna be so jealous!",
+    text: "Just received my plants. 🌺 Can't wait to see these beauties in my garden. My neighbors are gonna be so jealous!",
   },
   {
     name: "Daniel G",
@@ -46,11 +46,11 @@ const testimonials = [
   },
   {
     name: "Claudia O",
-    text: "This is my third purchase, and there's a reason I keep coming back. The seeds are consistently high-quality and the germination rate is the best I've found. Highly recommend.",
+    text: "This is my third purchase, and there's a reason I keep coming back. The plants are consistently high-quality and the growth rate is the best I've found. Highly recommend.",
   },
   {
     name: "Valérie G",
-    text: "Fantastic seeds, beautiful flowers. Already on my third order from them.",
+    text: "Fantastic plants, beautiful flowers. Already on my third order from them.",
   },
 ]
 

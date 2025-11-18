@@ -228,7 +228,7 @@ export default function Upsell2PageIT() {
           <div className="space-y-4 sm:space-y-6">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
-                Kit Semi di Fiori di Ibisco Rari | Multicolore
+                Kit Piantine di Fiori di Ibisco Rari | Multicolore
               </h2>
               <p className="text-xs uppercase text-muted-foreground mb-3 sm:mb-4 tracking-wide">
                 OFFERTA SPECIALE - KIT PIANTA IBISCO 4 COLORI (GIALLO, VIOLA, ROSSO E ROSA)

@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react"
+import { Check, X } from 'lucide-react'
 
 export function ComparisonSection() {
   const features = [
@@ -8,6 +8,7 @@ export function ComparisonSection() {
     "24/7 Customer Support",
     "100% Secure Payment With SSL Encryption",
     "Germination Guide with step-by-step Instructions",
+    "Planting & Care Guide with step-by-step Instructions",
   ]
 
   return (

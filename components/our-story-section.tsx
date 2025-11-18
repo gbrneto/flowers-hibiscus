@@ -26,7 +26,7 @@ export function OurStorySection() {
               <p>
                 Versia Garden's story begins with the passion of our founder, botanist Helena Viana, for the power of
                 flowers to turn the ordinary into the extraordinary. She saw that thousands of people shared this dream
-                but were held back by the frustration of inaccessible and difficult-to-grow rare seeds. Her mission
+                but were held back by the frustration of inaccessible and difficult-to-grow rare plants. Her mission
                 became clear: to create a complete ecosystem to empower anyone to succeed, focusing solely on the joy of
                 gardening.
               </p>
@@ -34,7 +34,7 @@ export function OurStorySection() {
               <p>
                 From that mission, 'The Colour Awakening' movement was born. Today, we are more than a store; we are
                 partners for everyone who wishes to be an agent of transformation by cultivating beauty in their own
-                homes. Join us, plant a seed, and watch your own story of colour unfold.
+                homes. Join us, plant a hibiscus, and watch your own story of colour unfold.
               </p>
             </div>
 
@@ -56,7 +56,7 @@ export function OurStorySection() {
           <div className="relative w-full rounded-2xl overflow-hidden">
             <Image
               src="/images/design-mode/a8e399fcfcf6a29c3ce0bd1ae5ff2900d1d38aa9.webp"
-              alt="Hibiscus germination process"
+              alt="Hibiscus growth process"
               width={1200}
               height={600}
               className="w-full h-auto"

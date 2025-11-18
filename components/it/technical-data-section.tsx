@@ -38,7 +38,7 @@ export function TechnicalDataSection() {
             <div className="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200">
               <div className="p-4 font-semibold bg-gray-50">Colori dei Fiori</div>
               <div className="p-4 md:col-span-2">
-                I nostri kit contengono semi per varietà rare con combinazioni di colori esotici e vibranti.
+                I nostri kit contengono giovani piantine sane di varietà rare con combinazioni di colori esotici e vibranti.
               </div>
             </div>
 

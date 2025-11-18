@@ -228,7 +228,7 @@ export default function Upsell2Page() {
           <div className="space-y-4 sm:space-y-6">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
-                Rare Hibiscus Flowers Seeds Kit | Multicolor
+                Rare Hibiscus Flowers Plant Kit | Multicolor
               </h2>
               <p className="text-xs uppercase text-muted-foreground mb-3 sm:mb-4 tracking-wide">
                 SPECIAL OFFER - 4-COLOUR HIBISCUS PLANT KIT (YELLOW, PURPLE, RED & PINK)

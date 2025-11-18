@@ -1,6 +1,6 @@
 "use client"
 
-import { X } from "lucide-react"
+import { X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
 interface UpsellModalProps {
@@ -48,14 +48,14 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
           <div className="w-full rounded-lg overflow-hidden">
             <img
               src="/images/design-mode/Group%201089.png"
-              alt="Plus Kit with Hibiscus, Sunflower, and Petunia seeds"
+              alt="Plus Kit with Hibiscus, Sunflower, and Petunia plants"
               className="w-full h-auto"
             />
           </div>
 
           {/* Kit contents description */}
           <p className="text-center text-base sm:text-lg text-gray-800">
-            In this kit, you'll receive 20 Hibiscus seeds + 20 Giant Sunflower seeds + 20 Galaxy Petunia seeds
+            In this kit, you'll receive 20 Hibiscus plants + 20 Giant Sunflower plants + 20 Galaxy Petunia plants
           </p>
 
           {/* Price section */}
@@ -80,7 +80,7 @@ export function UpsellModal({ isOpen, onClose, onAccept, onDecline }: UpsellModa
               variant="outline"
               className="w-full h-14 text-base font-bold rounded-md bg-gray-400 hover:bg-gray-500 text-white border-gray-400"
             >
-              Just the hibiscus Seeds
+              Just the hibiscus Plants
             </Button>
           </div>
         </div>

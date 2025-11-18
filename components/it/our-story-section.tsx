@@ -24,11 +24,11 @@ export function OurStorySection() {
 
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                La storia di Versia Garden inizia con la passione della nostra fondatrice, la botanica Helena Viana, per il potere dei fiori di trasformare l'ordinario nello straordinario. Ha visto che migliaia di persone condividevano questo sogno ma erano trattenute dalla frustrazione di semi rari inaccessibili e difficili da coltivare. La sua missione è diventata chiara: creare un ecosistema completo per permettere a chiunque di avere successo, concentrandosi esclusivamente sulla gioia del giardinaggio.
+                La storia di Versia Garden inizia con la passione della nostra fondatrice, la botanica Helena Viana, per il potere dei fiori di trasformare l'ordinario nello straordinario. Ha visto che migliaia di persone condividevano questo sogno ma erano trattenute dalla frustrazione di piante rare inaccessibili e difficili da coltivare. La sua missione è diventata chiara: creare un ecosistema completo per permettere a chiunque di avere successo, concentrandosi esclusivamente sulla gioia del giardinaggio.
               </p>
 
               <p>
-                Da quella missione è nato il movimento 'The Colour Awakening'. Oggi siamo più di un negozio; siamo partner per tutti coloro che desiderano essere agenti di trasformazione coltivando la bellezza nelle proprie case. Unisciti a noi, pianta un seme e guarda la tua storia di colore svolgersi.
+                Da quella missione è nato il movimento 'The Colour Awakening'. Oggi siamo più di un negozio; siamo partner per tutti coloro che desiderano essere agenti di trasformazione coltivando la bellezza nelle proprie case. Unisciti a noi, pianta un ibisco e guarda la tua storia di colore svolgersi.
               </p>
             </div>
 
@@ -50,7 +50,7 @@ export function OurStorySection() {
           <div className="relative w-full rounded-2xl overflow-hidden">
             <Image
               src="/images/design-mode/a8e399fcfcf6a29c3ce0bd1ae5ff2900d1d38aa9.webp"
-              alt="Processo di germinazione dell'ibisco"
+              alt="Processo di crescita dell'ibisco"
               width={1200}
               height={600}
               className="w-full h-auto"
