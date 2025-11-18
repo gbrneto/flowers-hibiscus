@@ -5,13 +5,15 @@ import { X, Minus, Plus, Trash2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
 import { cn } from "@/lib/utils"
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 export function CartSidebar() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalItems, getSubtotal, getTotalSavings } =
     useCart()
   const [timeLeft, setTimeLeft] = useState(300) // 5 minutes in seconds
   const router = useRouter()
+  const pathname = usePathname()
+  const isItalian = pathname?.startsWith('/it')
 
   // Countdown timer
   useEffect(() => {
@@ -45,7 +47,7 @@ export function CartSidebar() {
 
   const handleCheckout = () => {
     closeCart()
-    router.push("/checkout")
+    router.push(isItalian ? "/it/checkout" : "/checkout")
   }
 
   return (
@@ -69,7 +71,7 @@ export function CartSidebar() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b">
           <h2 className="text-xl font-bold">
-            Cart • {getTotalItems()} {getTotalItems() === 1 ? "item" : "items"}
+            {isItalian ? `Carrello • ${getTotalItems()} ${getTotalItems() === 1 ? "articolo" : "articoli"}` : `Cart • ${getTotalItems()} ${getTotalItems() === 1 ? "item" : "items"}`}
           </h2>
           <button
             onClick={closeCart}
@@ -83,7 +85,7 @@ export function CartSidebar() {
         {/* Timer Bar */}
         {items.length > 0 && (
           <div className="bg-black text-white text-center py-3 text-sm font-semibold">
-            Cart reserved for {formatTime(timeLeft)}
+            {isItalian ? `Carrello riservato per ${formatTime(timeLeft)}` : `Cart reserved for ${formatTime(timeLeft)}`}
           </div>
         )}
 
@@ -91,14 +93,13 @@ export function CartSidebar() {
         <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <p className="text-gray-500 text-lg mb-2">Your cart is empty</p>
-              <p className="text-gray-400 text-sm">Add some items to get started</p>
+              <p className="text-gray-500 text-lg mb-2">{isItalian ? "Il tuo carrello è vuoto" : "Your cart is empty"}</p>
+              <p className="text-gray-400 text-sm">{isItalian ? "Aggiungi alcuni articoli per iniziare" : "Add some items to get started"}</p>
             </div>
           ) : (
             <div className="space-y-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-3 pb-4 border-b">
-                  {/* Product Image */}
                   <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden bg-gray-100">
                     <img
                       src={item.image || "/placeholder.svg"}
@@ -107,7 +108,6 @@ export function CartSidebar() {
                     />
                   </div>
 
-                  {/* Product Details */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <h3 className="font-semibold text-sm leading-tight line-clamp-2">{item.name}</h3>
@@ -124,7 +124,6 @@ export function CartSidebar() {
                       {item.color} / {item.kitLabel}
                     </p>
 
-                    {/* Quantity Controls */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 border rounded-md">
                         <button
@@ -148,12 +147,17 @@ export function CartSidebar() {
                       <div className="text-right">
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-gray-500 line-through">
-                            £{(item.originalPrice * item.quantity).toFixed(2)}
+                            {isItalian ? `€${(item.originalPrice * item.quantity).toFixed(2)}` : `£${(item.originalPrice * item.quantity).toFixed(2)}`}
                           </span>
-                          <span className="text-sm font-bold">£{(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-sm font-bold">
+                            {isItalian ? `€${(item.price * item.quantity).toFixed(2)}` : `£${(item.price * item.quantity).toFixed(2)}`}
+                          </span>
                         </div>
                         <p className="text-xs text-success-green font-medium">
-                          (You save £{((item.originalPrice - item.price) * item.quantity).toFixed(2)})
+                          {isItalian 
+                            ? `(Risparmi €${((item.originalPrice - item.price) * item.quantity).toFixed(2)})`
+                            : `(You save £${((item.originalPrice - item.price) * item.quantity).toFixed(2)})`
+                          }
                         </p>
                       </div>
                     </div>
@@ -169,14 +173,18 @@ export function CartSidebar() {
           <div className="border-t p-4 space-y-3">
             {/* Savings */}
             <div className="flex items-center justify-between text-sm">
-              <span className="font-semibold">Savings</span>
-              <span className="text-success-green font-bold">-£{getTotalSavings().toFixed(2)}</span>
+              <span className="font-semibold">{isItalian ? "Risparmi" : "Savings"}</span>
+              <span className="text-success-green font-bold">
+                {isItalian ? `-€${getTotalSavings().toFixed(2)}` : `-£${getTotalSavings().toFixed(2)}`}
+              </span>
             </div>
 
             {/* Subtotal */}
             <div className="flex items-center justify-between text-lg">
-              <span className="font-bold">Subtotal</span>
-              <span className="font-bold">£{getSubtotal().toFixed(2)}</span>
+              <span className="font-bold">{isItalian ? "Subtotale" : "Subtotal"}</span>
+              <span className="font-bold">
+                {isItalian ? `€${getSubtotal().toFixed(2)}` : `£${getSubtotal().toFixed(2)}`}
+              </span>
             </div>
 
             {/* Checkout Button */}
@@ -185,7 +193,7 @@ export function CartSidebar() {
               className="w-full h-12 text-base font-bold rounded-md"
               style={{ backgroundColor: "#2d5f4f", color: "white" }}
             >
-              Check out
+              {isItalian ? "Vai al pagamento" : "Check out"}
             </Button>
 
             {/* Payment Icons */}
