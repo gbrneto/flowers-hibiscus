@@ -9,8 +9,8 @@ export function SuccessSection() {
           <div className="order-1">
             <div className="relative rounded-lg overflow-hidden">
               <Image
-                src="/images/design-mode/Group%201072.png"
-                alt="Germination Kit"
+                src="/images/design-mode/Plants.jpg"
+                alt="Hibiscus Plants"
                 width={800}
                 height={600}
                 className="w-full h-auto"
@@ -21,11 +21,10 @@ export function SuccessSection() {
           {/* Content */}
           <div className="order-2 text-white">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold mb-6 text-balance">
-              Ensure Success with Your Rare Hibiscus
+              A Perfect Start for Your Rare Hibiscus
             </h2>
             <p className="text-base lg:text-lg leading-relaxed">
-              Take the guesswork out of germination. Our kit includes a complete, step-by-step guide to ensure you
-              succeed.
+              Skip the hardest part of growing. Our kit provides you with healthy, established young plants, giving you a huge head start. We include a complete Planting & Care Guide to ensure your success from day one.
             </p>
           </div>
         </div>

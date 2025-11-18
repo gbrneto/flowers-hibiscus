@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
       console.log("[v0] Skipping one-time payment (amount is 0)")
     }
 
-    const redirectUrl = `${appUrl}/thank-you?email=${encodeURIComponent(customerData.email)}`
+    const redirectUrl = `${appUrl}/upsell1?email=${encodeURIComponent(customerData.email)}&customer=${customer.id}`
     console.log("[v0] Success! Redirecting to:", redirectUrl)
 
     return NextResponse.json({

@@ -8,6 +8,7 @@ import { SuccessSection } from "@/components/success-section"
 import { GerminationSection } from "@/components/germination-section"
 import { TechnicalDataSection } from "@/components/technical-data-section"
 import { ComparisonSection } from "@/components/comparison-section"
+import { CustomerReviewsSection } from "@/components/customer-reviews-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { OurStorySection } from "@/components/our-story-section"
 import { Footer } from "@/components/footer"
@@ -26,6 +27,7 @@ export default function Home() {
         <GerminationSection />
         <TechnicalDataSection />
         <ComparisonSection />
+        <CustomerReviewsSection />
         <TestimonialsSection />
         <OurStorySection />
       </main>

@@ -2,10 +2,10 @@
 
 export function ScrollingMarquee() {
   const messages = [
-    "Up to 97% Germination Success Rate",
+    "Guaranteed to Thrive",
     "Secure Payment & Fast, Tracked Shipping",
     "Limited Stock",
-    "Up to 97% Germination Success Rate",
+    "Guaranteed to Thrive",
     "Secure Payment & Fast, Tracked Shipping",
   ]
 

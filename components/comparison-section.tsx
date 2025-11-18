@@ -2,8 +2,8 @@ import { Check, X } from "lucide-react"
 
 export function ComparisonSection() {
   const features = [
-    "Advanced Germination System",
-    "Up to 97% Germination Success",
+    "Professionally Nurtured Young Plants non GMO",
+    "Healthy Arrival & Growth Guarantee",
     "Complete Kit with Guide & Guarantee",
     "24/7 Customer Support",
     "100% Secure Payment With SSL Encryption",
@@ -17,7 +17,7 @@ export function ComparisonSection() {
           {/* Heading */}
           <div className="lg:max-w-md">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              Why choose Versia Garden's Hibiscus Germination Kit?
+              Why choose Versia Garden&#39;s Hibiscus Young Plant Kit?
             </h2>
             <p className="text-muted-foreground">See why our kits deliver superior results.</p>
           </div>

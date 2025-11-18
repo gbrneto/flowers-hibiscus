@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams } from 'next/navigation'
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle, Mail, ArrowRight } from "lucide-react"
+import { CheckCircle, Mail, ArrowRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
 declare global {
@@ -16,6 +16,8 @@ declare global {
 export default function ThankYouPage() {
   const searchParams = useSearchParams()
   const [email, setEmail] = useState<string | null>(null)
+  const upsellAccepted = searchParams.get("upsell") === "true"
+  const upsell2Accepted = searchParams.get("upsell2") === "true"
 
   useEffect(() => {
     const emailParam = searchParams.get("email")
@@ -43,7 +45,7 @@ export default function ThankYouPage() {
       <header className="border-b border-border bg-background">
         <div className="container mx-auto px-4 py-4">
           <Link href="/">
-            <Image src="/versia-garden-logo.jpg" alt="Versia Garden" width={120} height={50} className="h-12 w-auto" />
+            <Image src="/images/design-mode/logoversiagardemsemfundo%201.png" alt="Versia Garden" width={120} height={50} className="h-12 w-auto" />
           </Link>
         </div>
       </header>
@@ -76,6 +78,23 @@ export default function ThankYouPage() {
                 <p className="text-sm text-muted-foreground mb-1">Confirmation sent to:</p>
                 <p className="text-base font-medium text-foreground">{email}</p>
               </div>
+            </div>
+          )}
+
+          {upsellAccepted && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6 mb-8 text-left">
+              <p className="text-base text-emerald-900">
+                <strong>Parabéns!</strong> Seu acesso ao <strong>Curso Mestre de Jardinagem</strong> foi liberado.
+                Verifique seu e-mail para as instruções de acesso.
+              </p>
+            </div>
+          )}
+
+          {upsell2Accepted && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-left">
+              <p className="text-base text-blue-900">
+                <strong>Offer Confirmed!</strong> Your extra Hibiscus Kit has been added to your shipment.
+              </p>
             </div>
           )}
 

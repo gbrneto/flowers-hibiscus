@@ -19,10 +19,10 @@ const PRODUCT_IMAGES = [
 
 const COLOR_IMAGE_MAP: Record<string, number> = {
   "Mixed Colours": 0, // image 894.png
-  Red: 1, // Hb vermelho.png
-  Yellow: 2, // Hb amarelo.png
-  Pink: 3, // Hb rosa 1.1.png
-  Purple: 4, // Hb roxo 1.1.png
+  "Red": 1, // Hb vermelho.png
+  "Yellow": 2, // Hb amarelo.png
+  "Pink": 3, // Hb rosa 1.1.png
+  "Purple": 4, // Hb roxo 1.1.png
 }
 
 const SHOPIFY_CART_URLS: Record<string, Record<string, string>> = {
@@ -81,20 +81,20 @@ export function ProductSection() {
   ]
 
   const kits = [
-    { id: "20-seeds", label: "20 Seeds + Germination Guide (FREE)", price: 0, originalPrice: 18.8 },
-    { id: "75-seeds", label: "75 Seeds + Germination Guide", price: 23.8, originalPrice: 35.8 },
-    { id: "50-seeds", label: "50 Seeds + Germination Guide", price: 17.8, originalPrice: 28.8 },
+    { id: "20-seeds", label: "Special Offer - 4-Colour Hibiscus Plant Kit (Yellow, Purple, Red & Pink)", price: 19.87, originalPrice: 39.74 },
+    { id: "75-seeds", label: "Red Hibiscus - Pack of 4", price: 24.87, originalPrice: 49.74 },
+    { id: "50-seeds", label: "Yellow Hibiscus - Pack of 4", price: 24.87, originalPrice: 49.74 },
     {
       id: "silver-kit",
-      label: "Silver Kit (200 Seeds + 1 Germination Tray + Guide)",
-      price: 49.8,
-      originalPrice: 79.8,
+      label: "Pink Hibiscus - Pack of 4",
+      price: 24.87,
+      originalPrice: 49.74,
     },
     {
       id: "gold-kit",
-      label: "Gold Kit (300 Seeds + 2 Germination Tray + Guide + Fertilizer + Fungicide)",
-      price: 69.8,
-      originalPrice: 119.8,
+      label: "Purple Hibiscus - Pack of 4",
+      price: 24.87,
+      originalPrice: 49.74,
     },
   ]
 
@@ -105,7 +105,7 @@ export function ProductSection() {
 
   const getOriginalPrice = () => {
     const kit = kits.find((k) => k.id === selectedKit)
-    return kit ? kit.originalPrice : 18.8
+    return kit ? kit.originalPrice : 39.74
   }
 
   const getDiscountPercentage = () => {
@@ -134,7 +134,7 @@ export function ProductSection() {
     if (kit) {
       const cartItem = {
         id: `${selectedColor}-${selectedKit}`,
-        name: "Free 'The Colour Awakening' Campaign Kit | 150,000+ ALREADY CLAIMED!",
+        name: "Rare Hibiscus Flowers Kit | Multicolor",
         color: selectedColor,
         kit: selectedKit,
         kitLabel: kit.label,
@@ -151,7 +151,7 @@ export function ProductSection() {
           content_ids: [cartItem.id],
           content_type: "product",
           value: cartItem.price * quantity,
-          currency: "EUR",
+          currency: "GBP",
         })
       }
     }
@@ -367,7 +367,7 @@ export function ProductSection() {
 
           <div className="space-y-6">
             <h1 className="text-2xl lg:text-3xl font-bold text-balance leading-tight">
-              Free 'The Colour Awakening' Campaign Kit | 150,000+ ALREADY CLAIMED!
+              Rare Hibiscus Flowers Kit | Multicolor
             </h1>
 
             <div className="flex flex-wrap gap-6 lg:gap-8 justify-center mx-10">
@@ -378,11 +378,11 @@ export function ProductSection() {
               <div className="flex flex-col items-center gap-2">
                 <Shield className="w-8 h-8 text-gray-700" />
                 <span className="text-xs font-semibold text-center">
-                  97%
+                  Guaranteed 
                   <br />
-                  Germination
+                  to
                   <br />
-                  Success
+                  Thrive
                 </span>
               </div>
               <div className="flex flex-col items-center gap-2">
@@ -404,18 +404,18 @@ export function ProductSection() {
               <div className="flex gap-3">
                 <Check className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                 <p className="text-base">
-                  <strong>Guaranteed Success:</strong> Achieve up to 97% germination, or get your money back.
+                  <strong>Guaranteed Success:</strong> Your young plants will arrive healthy and are guaranteed to thrive, or get your money back.
                 </p>
               </div>
               <div className="flex gap-3">
                 <Check className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                 <p className="text-base">
-                  Receive a FREE fertilizer and fungicide kit to nourish and protect your new sprouts.
+                  Receive a FREE fertilizer and fungicide kit to nourish and protect your new plants.
                 </p>
               </div>
               <div className="flex gap-3">
                 <Check className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
-                <p className="text-base">See Your First Sprouts in as Little as 12 Hours.</p>
+                <p className="text-base">Get a Head Start: Enjoy healthy, green plants from the moment they arrive.</p>
               </div>
               <div className="flex gap-3">
                 <Check className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
@@ -567,7 +567,7 @@ export function ProductSection() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold truncate">
-                Free 'The Colour Awakening' Campaign Kit | 150,000+ ALREADY CLAIMED!
+                Rare Hibiscus Flowers Kit | Multicolor
               </h3>
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-lg font-bold">£{getCurrentPrice().toFixed(2).replace(".", ",")}</span>

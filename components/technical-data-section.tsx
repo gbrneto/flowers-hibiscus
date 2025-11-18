@@ -43,17 +43,6 @@ export function TechnicalDataSection() {
               </div>
             </div>
 
-            {/* Germination Time - Highlighted */}
-            <div className="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200 bg-[#f5f0e8]">
-              <div className="p-4 font-semibold">Germination Time</div>
-              <div className="p-4 md:col-span-2">
-                Traditionally, from weeks.{" "}
-                <span className="font-bold">
-                  With the Versia Tray, sprouts can emerge in just 12 hours to 72 hours.
-                </span>
-              </div>
-            </div>
-
             {/* Ideal Planting Season */}
             <div className="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200">
               <div className="p-4 font-semibold bg-gray-50">Ideal Planting Season</div>

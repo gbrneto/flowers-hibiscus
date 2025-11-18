@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { X, Minus, Plus, Trash2 } from "lucide-react"
+import { X, Minus, Plus, Trash2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
 import { cn } from "@/lib/utils"
-import { useRouter } from "next/navigation"
+import { useRouter } from 'next/navigation'
 
 export function CartSidebar() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalItems, getSubtotal, getTotalSavings } =
@@ -148,12 +148,12 @@ export function CartSidebar() {
                       <div className="text-right">
                         <div className="flex items-center gap-2">
                           <span className="text-xs text-gray-500 line-through">
-                            €{(item.originalPrice * item.quantity).toFixed(2)}
+                            £{(item.originalPrice * item.quantity).toFixed(2)}
                           </span>
-                          <span className="text-sm font-bold">€{(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="text-sm font-bold">£{(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                         <p className="text-xs text-success-green font-medium">
-                          (You save €{((item.originalPrice - item.price) * item.quantity).toFixed(2)})
+                          (You save £{((item.originalPrice - item.price) * item.quantity).toFixed(2)})
                         </p>
                       </div>
                     </div>
@@ -170,13 +170,13 @@ export function CartSidebar() {
             {/* Savings */}
             <div className="flex items-center justify-between text-sm">
               <span className="font-semibold">Savings</span>
-              <span className="text-success-green font-bold">-€{getTotalSavings().toFixed(2)}</span>
+              <span className="text-success-green font-bold">-£{getTotalSavings().toFixed(2)}</span>
             </div>
 
             {/* Subtotal */}
             <div className="flex items-center justify-between text-lg">
               <span className="font-bold">Subtotal</span>
-              <span className="font-bold">€{getSubtotal().toFixed(2)}</span>
+              <span className="font-bold">£{getSubtotal().toFixed(2)}</span>
             </div>
 
             {/* Checkout Button */}

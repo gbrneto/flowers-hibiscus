@@ -6,20 +6,16 @@ export function GerminationSection() {
           {/* Text Content - Shows first on mobile, left on desktop */}
           <div className="md:w-1/2 md:order-1">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              OUR EXCLUSIVE TECHNIQUE GUARANTEES YOUR SEEDS WILL SPROUT
+              OUR EXPERT CARE GUARANTEES YOUR PLANTS WILL THRIVE
             </h2>
 
             <div className="space-y-4 text-base md:text-lg text-gray-700 leading-relaxed">
               <p>
-                Our <span className="font-bold text-black">Germination Tray</span> uses a hydroponic foam method that
-                simultaneously breaks the seeds' dormancy and kickstarts germination. This means that in as little as{" "}
-                <span className="font-bold text-black">12 hours</span> your seeds will develop into sprouts, ready to be
-                transplanted into soil.
+                Each of our young plants is nurtured by expert growers to develop a robust root system, making it strong and resilient. 
               </p>
 
               <p>
-                Your purchase includes a complete Germination Guide with step-by-step instructions on how to use the
-                germination tray.
+                We ship them directly from our nursery to you in custom-designed, secure packaging. This ensures your plant arrives healthy and ready to flourish, skipping the fragile and uncertain sprouting stage entirely.
               </p>
             </div>
           </div>
@@ -28,7 +24,7 @@ export function GerminationSection() {
           <div className="mt-8 md:mt-0 md:w-1/2 md:order-2">
             <div className="relative rounded-2xl overflow-hidden">
               <img
-                src="/images/design-mode/image%20848.png"
+                src="/images/design-mode/image%20895.png"
                 alt="Germination tray with seedlings and hand opening lid"
                 className="w-full h-auto"
               />

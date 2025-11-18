@@ -1,4 +1,4 @@
-import { Star } from "lucide-react"
+import { Star } from 'lucide-react'
 import Image from "next/image"
 
 export function OurStorySection() {
@@ -55,12 +55,11 @@ export function OurStorySection() {
         <div className="mt-12 md:mt-16 max-w-7xl mx-auto">
           <div className="relative w-full rounded-2xl overflow-hidden">
             <Image
-              src="/images/design-mode/a8e399fcfcf6a29c3ce0bd1ae5ff2900d1d38aa9.gif"
+              src="/images/design-mode/a8e399fcfcf6a29c3ce0bd1ae5ff2900d1d38aa9.webp"
               alt="Hibiscus germination process"
               width={1200}
               height={600}
               className="w-full h-auto"
-              unoptimized
             />
           </div>
         </div>

@@ -20,7 +20,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ChevronDown, Search, Info, Lock, ShoppingBag, X } from "lucide-react"
+import { ChevronDown, Search, Info, Lock, ShoppingBag, X } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 import Script from "next/script"
@@ -29,12 +29,12 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 
 const countryCurrencyMap: { [key: string]: string } = {
   GB: "GBP",
-  PT: "EUR",
-  ES: "EUR",
-  FR: "EUR",
-  DE: "EUR",
-  IT: "EUR",
-  US: "USD",
+  PT: "GBP",
+  ES: "GBP",
+  FR: "GBP",
+  DE: "GBP",
+  IT: "GBP",
+  US: "GBP",
 }
 
 declare global {
@@ -80,7 +80,7 @@ function CheckoutForm() {
   const [paymentRequest, setPaymentRequest] = useState<any>(null)
 
   const currency = countryCurrencyMap[selectedCountry] || "GBP"
-  const currencySymbol = currency === "EUR" ? "€" : currency === "USD" ? "$" : "£"
+  const currencySymbol = "£"
 
   const getCountryCode = (countryValue: string): string | string[] => {
     return countryValue.toLowerCase()
@@ -300,7 +300,7 @@ function CheckoutForm() {
   }
 
   const subtotal = getSubtotal()
-  const shippingCost = postcode ? (selectedShipping === "standard" ? 7.82 : 14.55) : 0
+  const shippingCost = postcode ? (selectedShipping === "standard" ? 0 : 14.55) : 0
   const total = subtotal + shippingCost
   const hasCompleteAddress = address.trim().length > 0 && city.trim().length > 0 && postcode.trim().length > 0
 
@@ -376,7 +376,7 @@ function CheckoutForm() {
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm font-medium leading-tight mb-1">{item.name}</h3>
+              <h3 className="text-sm font-medium leading-tight mb-1">Rare Hibiscus Flowers Kit | Multicolor</h3>
               <p className="text-xs text-muted-foreground">
                 {item.color} / {item.kitLabel}
               </p>
@@ -389,18 +389,15 @@ function CheckoutForm() {
             <div className="text-right">
               {item.originalPrice > item.price && (
                 <p className="text-xs text-muted-foreground line-through">
-                  {currencySymbol}
-                  {(item.originalPrice * item.quantity).toFixed(2)}
+                  £{(item.originalPrice * item.quantity).toFixed(2)}
                 </p>
               )}
               <p className="text-sm font-semibold">
-                {currencySymbol}
-                {(item.price * item.quantity).toFixed(2)}
+                £{(item.price * item.quantity).toFixed(2)}
               </p>
               {item.originalPrice > item.price && (
                 <p className="text-xs text-[#0d5c3d] font-medium">
-                  (You save {currencySymbol}
-                  {((item.originalPrice - item.price) * item.quantity).toFixed(2)})
+                  (You save £{((item.originalPrice - item.price) * item.quantity).toFixed(2)})
                 </p>
               )}
             </div>
@@ -421,8 +418,7 @@ function CheckoutForm() {
         <div className="flex justify-between text-sm">
           <span>Subtotal</span>
           <span className="font-medium">
-            {currencySymbol}
-            {subtotal.toFixed(2)}
+            £{subtotal.toFixed(2)}
           </span>
         </div>
         <div className="flex justify-between text-sm">
@@ -431,7 +427,7 @@ function CheckoutForm() {
             <Info className="h-3 w-3 text-muted-foreground" />
           </div>
           <span className="font-medium">
-            {hasCompleteAddress ? `${currencySymbol}${shippingCost.toFixed(2)}` : "Enter shipping address"}
+            {hasCompleteAddress ? `£${shippingCost.toFixed(2)}` : "Enter shipping address"}
           </span>
         </div>
         <div className="flex justify-between text-lg font-semibold pt-3 border-t border-border">
@@ -439,8 +435,7 @@ function CheckoutForm() {
           <div className="text-right">
             <span className="text-xs text-muted-foreground font-normal mr-2">{currency}</span>
             <span>
-              {currencySymbol}
-              {total.toFixed(2)}
+              £{total.toFixed(2)}
             </span>
           </div>
         </div>
@@ -545,11 +540,9 @@ function CheckoutForm() {
         <header className="border-b border-border bg-background sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <Link href="/">
-              <Image
-                src="/images/design-mode/logoversiagardemsemfundo%202.png"
+              <img
+                src="/images/design-mode/logoversiagardemsemfundo%201.png"
                 alt="Versia Garden"
-                width={120}
-                height={50}
                 className="h-12 w-auto"
               />
             </Link>
@@ -579,8 +572,7 @@ function CheckoutForm() {
                   <ChevronDown className={`h-4 w-4 transition-transform ${showOrderSummary ? "rotate-180" : ""}`} />
                 </div>
                 <span className="text-lg font-semibold">
-                  {currencySymbol}
-                  {total.toFixed(2)}
+                  £{total.toFixed(2)}
                 </span>
               </button>
 
@@ -795,11 +787,12 @@ function CheckoutForm() {
                       >
                         <div className="flex items-center gap-3">
                           <RadioGroupItem value="standard" id="standard" className="border-[#016630]" />
-                          <Label htmlFor="standard" className="cursor-pointer font-normal">
-                            Standard
+                          <Label htmlFor="standard" className="cursor-pointer">
+                            <div className="font-normal">Standard</div>
+                            <div className="text-xs text-muted-foreground mt-0.5">7-10 days</div>
                           </Label>
                         </div>
-                        <span className="font-semibold">{currencySymbol}7.82</span>
+                        <span className="font-semibold text-[#016630]">FREE</span>
                       </div>
                       <div
                         className={`flex items-center justify-between p-4 transition-colors ${
@@ -808,11 +801,12 @@ function CheckoutForm() {
                       >
                         <div className="flex items-center gap-3">
                           <RadioGroupItem value="express" id="express" className="border-[#016630]" />
-                          <Label htmlFor="express" className="cursor-pointer font-normal">
-                            Express
+                          <Label htmlFor="express" className="cursor-pointer">
+                            <div className="font-normal">Express</div>
+                            <div className="text-xs text-muted-foreground mt-0.5">3-4 days</div>
                           </Label>
                         </div>
-                        <span className="font-semibold">{currencySymbol}14.55</span>
+                        <span className="font-semibold">£14.55</span>
                       </div>
                     </div>
                   </RadioGroup>
@@ -832,28 +826,28 @@ function CheckoutForm() {
                     <span className="font-medium text-sm">Credit card</span>
                     <div className="flex gap-1.5 bg-[#F3F8F4] px-2.5 py-1.5 rounded-md">
                       <Image
-                        src="/images/design-mode/visa.sxIq5Dot.svg"
+                        src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/visa.sxIq5Dot.svg"
                         alt="Visa"
                         width={38}
                         height={24}
                         className="h-6 w-auto"
                       />
                       <Image
-                        src="/images/design-mode/maestro.ByfUQi1c.svg"
-                        alt="Maestro"
-                        width={38}
-                        height={24}
-                        className="h-6 w-auto"
-                      />
-                      <Image
-                        src="/images/design-mode/mastercard.1c4_lyMp.svg"
+                        src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/mastercard.1c4_lyMp.svg"
                         alt="Mastercard"
                         width={38}
                         height={24}
                         className="h-6 w-auto"
                       />
                       <Image
-                        src="/images/design-mode/blob-2025-10.svg"
+                        src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/maestro.ByfUQi1c.svg"
+                        alt="Maestro"
+                        width={38}
+                        height={24}
+                        className="h-6 w-auto"
+                      />
+                      <Image
+                        src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/amex.Csr7hRoy.svg"
                         alt="American Express"
                         width={38}
                         height={24}
@@ -986,8 +980,7 @@ function CheckoutForm() {
                     <ChevronDown className={`h-4 w-4 transition-transform ${showBottomSummary ? "rotate-180" : ""}`} />
                   </div>
                   <span className="text-lg font-semibold">
-                    {currencySymbol}
-                    {total.toFixed(2)}
+                    £{total.toFixed(2)}
                   </span>
                 </button>
 
@@ -1010,7 +1003,7 @@ function CheckoutForm() {
                 className="w-full h-14 bg-[#016630] hover:bg-[#014d24] text-white text-base font-semibold mb-4"
                 size="lg"
               >
-                {isLoading ? "Processing..." : `Complete Purchase (${currency})`}
+                {isLoading ? "Processing..." : `Complete Purchase (£${currency})`}
               </Button>
 
               {/* Footer Links */}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, Search, ShoppingCart, User } from "lucide-react"
+import { Menu, Search, ShoppingCart, User } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
@@ -57,7 +57,7 @@ export function Header() {
           {/* Logo - Centered on mobile, centered on desktop */}
           <div className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:flex-1 lg:flex lg:justify-center">
             <a href="#" className="flex items-center">
-              <img src="/images/design-mode/Group%201087.png" alt="Logo" className="h-12 w-auto" />
+              <img src="/images/design-mode/logoversiagardemsemfundo%201.png" alt="Logo" className="h-12 w-auto" />
             </a>
           </div>
 

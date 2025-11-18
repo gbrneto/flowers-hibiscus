@@ -36,11 +36,11 @@ export function FeaturesSection() {
           </div>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance">
-            Unleash a Tropical Explosion of Petals: Rare Double Hibiscus Seeds
+            Unleash a Tropical Explosion of Petals: Rare Double Hibiscus Young Plants
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto text-pretty">
             Bring a lush, exotic vibe to your garden with our{" "}
-            <span className="font-semibold text-foreground">Double Hibiscus</span> Seeds. Known for their full, layered
+            <span className="font-semibold text-foreground">Double Hibiscus</span> Starter Plants. Known for their full, layered
             blooms and vibrant colors, these flowers create a striking display that's impossible to ignore.
           </p>
         </div>
