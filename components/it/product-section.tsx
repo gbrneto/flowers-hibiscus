@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { Heart, Shield, Truck, Star, Check, Minus, Plus, ChevronLeft, ChevronRight, ShoppingCart, Package } from 'lucide-react'
+import useEmblaCarousel from "embla-carousel-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { UpsellModal } from "@/components/upsell-modal"
@@ -38,11 +38,9 @@ export function ProductSection() {
   const [selectedKit, setSelectedKit] = useState("20-seeds")
   const [quantity, setQuantity] = useState(1)
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
   const [showStickyBar, setShowStickyBar] = useState(false)
   const [showUpsellModal, setShowUpsellModal] = useState(false)
-  const carouselRef = useRef<HTMLDivElement>(null)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const offersRef = useRef<HTMLDivElement>(null)
 
   const { addItem } = useCart()
@@ -126,47 +124,41 @@ export function ProductSection() {
     const mapping = KIT_COLOR_MAP[kitId]
     if (mapping) {
       setSelectedColor(mapping.color)
-      setCurrentSlide(mapping.imageIndex)
+      if (emblaApi) {
+        emblaApi.scrollTo(mapping.imageIndex, true)
+      }
     }
   }
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % PRODUCT_IMAGES.length)
-  }
+  const nextSlide = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + PRODUCT_IMAGES.length) % PRODUCT_IMAGES.length)
-  }
+  const prevSlide = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
+  const goToSlide = useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index)
+    },
+    [emblaApi],
+  )
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
-  }
+  useEffect(() => {
+    if (!emblaApi) return
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
-
-    if (isLeftSwipe) {
-      nextSlide()
-    }
-    if (isRightSwipe) {
-      prevSlide()
+    const onSelect = () => {
+      setCurrentSlide(emblaApi.selectedScrollSnap())
     }
 
-    setTouchStart(0)
-    setTouchEnd(0)
-  }
+    emblaApi.on("select", onSelect)
+    onSelect() // Initial sync
+
+    return () => {
+      emblaApi.off("select", onSelect)
+    }
+  }, [emblaApi])
 
   const scrollToOffers = () => {
     offersRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -221,7 +213,7 @@ export function ProductSection() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [])
+  }, [prevSlide, nextSlide])
 
   return (
     <div className="w-full bg-white">
@@ -235,44 +227,37 @@ export function ProductSection() {
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <div className="space-y-4">
-            <div
-              ref={carouselRef}
-              className="relative aspect-square w-full overflow-hidden rounded-lg border border-gray-200 group"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div
-                className="flex h-full transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {PRODUCT_IMAGES.map((image, index) => (
-                  <div key={index} className="min-w-full h-full flex-shrink-0">
-                    <img
-                      src={image || "/placeholder.svg"}
-                      alt={`Immagine prodotto ${index + 1}`}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
+            <div className="relative aspect-square w-full rounded-lg border border-gray-200 group">
+              <div className="overflow-hidden h-full rounded-lg" ref={emblaRef}>
+                <div className="flex h-full touch-pan-y">
+                  {PRODUCT_IMAGES.map((image, index) => (
+                    <div key={index} className="flex-[0_0_100%] min-w-0 h-full relative">
+                      <img
+                        src={image || "/placeholder.svg"}
+                        alt={`Immagine prodotto ${index + 1}`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <button
                 onClick={prevSlide}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                 aria-label="Immagine precedente"
               >
                 <ChevronLeft className="w-6 h-6 text-gray-800" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                 aria-label="Immagine successiva"
               >
                 <ChevronRight className="w-6 h-6 text-gray-800" />
               </button>
 
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {PRODUCT_IMAGES.map((_, index) => (
                   <button
                     key={index}
