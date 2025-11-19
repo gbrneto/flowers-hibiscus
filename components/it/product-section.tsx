@@ -19,10 +19,18 @@ const PRODUCT_IMAGES = [
 
 const COLOR_IMAGE_MAP: Record<string, number> = {
   "Colori Misti": 0,
-  "Rosso": 1,
-  "Giallo": 2,
-  "Rosa": 3,
-  "Viola": 4,
+  Rosso: 1,
+  Giallo: 2,
+  Rosa: 3,
+  Viola: 4,
+}
+
+const KIT_COLOR_MAP: Record<string, { color: string; imageIndex: number }> = {
+  "20-seeds": { color: "Colori Misti", imageIndex: 0 },
+  "75-seeds": { color: "Rosso", imageIndex: 1 },
+  "50-seeds": { color: "Giallo", imageIndex: 2 },
+  "silver-kit": { color: "Rosa", imageIndex: 3 },
+  "gold-kit": { color: "Viola", imageIndex: 4 },
 }
 
 export function ProductSection() {
@@ -38,14 +46,6 @@ export function ProductSection() {
   const offersRef = useRef<HTMLDivElement>(null)
 
   const { addItem } = useCart()
-
-  const colors = [
-    { id: "Colori Misti", label: "Colori Misti" },
-    { id: "Rosso", label: "Rosso" },
-    { id: "Giallo", label: "Giallo" },
-    { id: "Rosa", label: "Rosa" },
-    { id: "Viola", label: "Viola" },
-  ]
 
   const kits = [
     { id: "20-seeds", label: "OFFERTA SPECIALE - Kit 4 Piantine (Giallo, Viola, Rosso e Rosa)", price: 19.87, originalPrice: 39.74 },
@@ -121,11 +121,12 @@ export function ProductSection() {
     setShowUpsellModal(false)
   }
 
-  const handleColorSelect = (colorLabel: string) => {
-    setSelectedColor(colorLabel)
-    const imageIndex = COLOR_IMAGE_MAP[colorLabel]
-    if (imageIndex !== undefined) {
-      setCurrentSlide(imageIndex)
+  const handleKitSelect = (kitId: string) => {
+    setSelectedKit(kitId)
+    const mapping = KIT_COLOR_MAP[kitId]
+    if (mapping) {
+      setSelectedColor(mapping.color)
+      setCurrentSlide(mapping.imageIndex)
     }
   }
 
@@ -372,26 +373,6 @@ export function ProductSection() {
               </span>
             </div>
 
-            <div className="space-y-3">
-              <label className="text-sm font-semibold">Colore del Fiore - {selectedColor}</label>
-              <div className="flex flex-wrap gap-2">
-                {colors.map((color) => (
-                  <button
-                    key={color.id}
-                    onClick={() => handleColorSelect(color.label)}
-                    className={cn(
-                      "px-4 py-2 rounded-full border text-sm font-medium transition-all",
-                      selectedColor === color.label
-                        ? "bg-black text-white border-black"
-                        : "bg-white text-black border-gray-300 hover:border-gray-400",
-                    )}
-                  >
-                    {color.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
             <div ref={offersRef} className="space-y-3">
               <label className="text-sm font-semibold">
                 Opzioni Kit - {kits.find((k) => k.id === selectedKit)?.label}
@@ -400,7 +381,7 @@ export function ProductSection() {
                 {kits.map((kit) => (
                   <button
                     key={kit.id}
-                    onClick={() => setSelectedKit(kit.id)}
+                    onClick={() => handleKitSelect(kit.id)}
                     className={cn(
                       "w-full px-4 py-3 rounded-full border text-sm font-medium text-left transition-all",
                       selectedKit === kit.id
@@ -520,7 +501,7 @@ export function ProductSection() {
               className="h-12 px-6 text-sm font-bold rounded-md whitespace-nowrap"
               style={{ backgroundColor: "#2d5f4f", color: "white" }}
             >
-              Aggiungi al carrello
+              Scegli il Mio Kit
             </Button>
           </div>
         </div>

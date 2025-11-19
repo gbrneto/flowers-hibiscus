@@ -19,10 +19,18 @@ const PRODUCT_IMAGES = [
 
 const COLOR_IMAGE_MAP: Record<string, number> = {
   "Mixed Colours": 0, // image 894.png
-  "Red": 1, // Hb vermelho.png
-  "Yellow": 2, // Hb amarelo.png
-  "Pink": 3, // Hb rosa 1.1.png
-  "Purple": 4, // Hb roxo 1.1.png
+  Red: 1, // Hb vermelho.png
+  Yellow: 2, // Hb amarelo.png
+  Pink: 3, // Hb rosa 1.1.png
+  Purple: 4, // Hb roxo 1.1.png
+}
+
+const KIT_COLOR_MAP: Record<string, { color: string; imageIndex: number }> = {
+  "20-seeds": { color: "Mixed Colours", imageIndex: 0 },
+  "75-seeds": { color: "Red", imageIndex: 1 },
+  "50-seeds": { color: "Yellow", imageIndex: 2 },
+  "silver-kit": { color: "Pink", imageIndex: 3 },
+  "gold-kit": { color: "Purple", imageIndex: 4 },
 }
 
 const SHOPIFY_CART_URLS: Record<string, Record<string, string>> = {
@@ -72,14 +80,6 @@ export function ProductSection() {
 
   const { addItem } = useCart()
 
-  const colors = [
-    { id: "Mixed Colours", label: "Mixed Colours" },
-    { id: "Red", label: "Red" },
-    { id: "Yellow", label: "Yellow" },
-    { id: "Pink", label: "Pink" },
-    { id: "Purple", label: "Purple" },
-  ]
-
   const kits = [
     { id: "20-seeds", label: "Special Offer - 4-Colour Hibiscus Plant Kit (Yellow, Purple, Red & Pink)", price: 19.87, originalPrice: 39.74 },
     { id: "75-seeds", label: "Red Hibiscus - Pack of 4", price: 24.87, originalPrice: 49.74 },
@@ -125,11 +125,6 @@ export function ProductSection() {
   }
 
   const handleAddToCart = () => {
-    // if (selectedKit === "20-seeds") {
-    //   setShowUpsellModal(true)
-    //   return
-    // }
-
     const kit = kits.find((k) => k.id === selectedKit)
     if (kit) {
       const cartItem = {
@@ -168,11 +163,12 @@ export function ProductSection() {
     setShowUpsellModal(false)
   }
 
-  const handleColorSelect = (colorLabel: string) => {
-    setSelectedColor(colorLabel)
-    const imageIndex = COLOR_IMAGE_MAP[colorLabel]
-    if (imageIndex !== undefined) {
-      setCurrentSlide(imageIndex)
+  const handleKitSelect = (kitId: string) => {
+    setSelectedKit(kitId)
+    const mapping = KIT_COLOR_MAP[kitId]
+    if (mapping) {
+      setSelectedColor(mapping.color)
+      setCurrentSlide(mapping.imageIndex)
     }
   }
 
@@ -433,26 +429,6 @@ export function ProductSection() {
               </span>
             </div>
 
-            <div className="space-y-3">
-              <label className="text-sm font-semibold">Flower Color - {selectedColor}</label>
-              <div className="flex flex-wrap gap-2">
-                {colors.map((color) => (
-                  <button
-                    key={color.id}
-                    onClick={() => handleColorSelect(color.label)}
-                    className={cn(
-                      "px-4 py-2 rounded-full border text-sm font-medium transition-all",
-                      selectedColor === color.label
-                        ? "bg-black text-white border-black"
-                        : "bg-white text-black border-gray-300 hover:border-gray-400",
-                    )}
-                  >
-                    {color.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
             <div ref={offersRef} className="space-y-3">
               <label className="text-sm font-semibold">
                 Kit Options - {kits.find((k) => k.id === selectedKit)?.label}
@@ -461,7 +437,7 @@ export function ProductSection() {
                 {kits.map((kit) => (
                   <button
                     key={kit.id}
-                    onClick={() => setSelectedKit(kit.id)}
+                    onClick={() => handleKitSelect(kit.id)}
                     className={cn(
                       "w-full px-4 py-3 rounded-full border text-sm font-medium text-left transition-all",
                       selectedKit === kit.id
@@ -499,11 +475,11 @@ export function ProductSection() {
             </div>
 
             <Button
-              onClick={handleAddToCart}
+              onClick={selectedKit === "20-seeds" ? scrollToOffers : handleAddToCart}
               className="w-full h-14 text-base font-bold rounded-md"
               style={{ backgroundColor: "#2d5f4f", color: "white" }}
             >
-              ADD TO CART
+              Choose My Kit
             </Button>
 
             <div className="pt-6 pb-4">
@@ -581,7 +557,7 @@ export function ProductSection() {
               className="h-12 px-6 text-sm font-bold rounded-md whitespace-nowrap"
               style={{ backgroundColor: "#2d5f4f", color: "white" }}
             >
-              Add to cart
+              Choose My Kit
             </Button>
           </div>
         </div>
