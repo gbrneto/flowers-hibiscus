@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
+import { supabaseAdmin } from "@/lib/supabase-admin"
 
 // --- PRICE CONFIGURATION AREA ---
-// Currency mapping to respective Price IDs
 const PRICE_IDS = {
   GBP: {
     oneTime: "price_1SDSeHCNWzvB3NegK5C4yyUn",
@@ -49,7 +49,6 @@ export async function POST(request: NextRequest) {
       locale,
     })
 
-    // Validate if the sent currency is supported
     const currencyKey = currency.toUpperCase() as keyof typeof PRICE_IDS
     if (!PRICE_IDS[currencyKey]) {
       return NextResponse.json({ error: `Currency ${currency} not supported.` }, { status: 400 })
@@ -70,7 +69,6 @@ export async function POST(request: NextRequest) {
     })
     console.log("[v0] Customer created:", customer.id)
 
-    // Select the correct price IDs based on currency
     const currentPrices = PRICE_IDS[currencyKey]
 
     console.log("[v0] Creating subscription with price:", currentPrices.subscription)
@@ -108,6 +106,39 @@ export async function POST(request: NextRequest) {
       }
     } else {
       console.log("[v0] Skipping one-time payment (amount is 0)")
+    }
+
+    try {
+      console.log("[v0] Logging order to Supabase...")
+      const { error: supabaseError } = await supabaseAdmin.from("hibiscus_orders").insert({
+        stripe_customer_id: customer.id,
+        customer_email: customerData.email,
+        customer_name: `${customerData.firstName} ${customerData.lastName}`,
+        customer_phone: customerData.phone || null,
+        shipping_address: {
+          line1: customerData.address,
+          city: customerData.city,
+          postal_code: customerData.postcode,
+          country: customerData.country,
+        },
+        items: [
+          {
+            name: "Hibiscus Kit",
+            type: "main",
+            price: amountInCents,
+          },
+        ],
+        total_amount_cents: amountInCents,
+        currency: currency,
+      })
+
+      if (supabaseError) {
+        console.error("[v0] Supabase insert error:", supabaseError)
+      } else {
+        console.log("[v0] Order logged to Supabase successfully")
+      }
+    } catch (dbError) {
+      console.error("[v0] Failed to log order to Supabase:", dbError)
     }
 
     const upsellPath = locale === 'it' ? '/it/upsell1' : '/upsell1'
