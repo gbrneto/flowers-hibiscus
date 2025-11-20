@@ -10,27 +10,32 @@ import { UpsellModal } from "@/components/upsell-modal"
 import { useCart } from "@/lib/cart-context"
 
 const PRODUCT_IMAGES = [
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20960.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20894.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20vermelho.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20amarelo.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20rosa%201.1.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20roxo%201.1.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20957.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20958.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20959.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20961.png",
 ]
 
 const COLOR_IMAGE_MAP: Record<string, number> = {
   "Colori Misti": 0,
-  Rosso: 1,
-  Giallo: 2,
-  Rosa: 3,
-  Viola: 4,
+  Rosso: 2,
+  Giallo: 3,
+  Rosa: 4,
+  Viola: 5,
 }
 
 const KIT_COLOR_MAP: Record<string, { color: string; imageIndex: number }> = {
   "20-seeds": { color: "Colori Misti", imageIndex: 0 },
-  "75-seeds": { color: "Rosso", imageIndex: 1 },
-  "50-seeds": { color: "Giallo", imageIndex: 2 },
-  "silver-kit": { color: "Rosa", imageIndex: 3 },
-  "gold-kit": { color: "Viola", imageIndex: 4 },
+  "75-seeds": { color: "Rosso", imageIndex: 2 },
+  "50-seeds": { color: "Giallo", imageIndex: 3 },
+  "silver-kit": { color: "Rosa", imageIndex: 4 },
+  "gold-kit": { color: "Viola", imageIndex: 5 },
 }
 
 export function ProductSection() {

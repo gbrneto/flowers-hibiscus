@@ -6,18 +6,20 @@ import { supabaseAdmin } from "@/lib/supabase-admin"
 const PRICE_IDS = {
   GBP: {
     oneTime: "price_1SDSeHCNWzvB3NegK5C4yyUn",
-    subscription: "price_1SDSgcCNWzvB3Neg0YVKPGmB",
+    subscription_app: "price_1SVYHXCNWzvB3Negxdu8nlgi", // App (29 days trial)
+    subscription_digital: "price_1SUX2cCNWzvB3Neg3Qj7xiJB", // Digital Course (1 day trial)
   },
   EUR: {
     oneTime: "price_1SDShyCNWzvB3Negz4rxJVjE",
-    subscription: "price_1SDSiiCNWzvB3NegN4flj6I1",
+    subscription_app: "price_1SDSiiCNWzvB3NegN4flj6I1", // App (29 days trial)
+    subscription_digital: "price_1SUdkyCNWzvB3NegKC29J6Kx", // Digital Course (1 day trial)
   },
 }
 // --- END PRICE CONFIGURATION AREA ---
 
 export async function POST(request: NextRequest) {
-  let locale = 'en'
-  
+  let locale = "en"
+
   try {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
@@ -38,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     const stripe = new Stripe(stripeSecretKey, { apiVersion: "2024-06-20" })
     const body = await request.json()
-    locale = body.locale || 'en'
+    locale = body.locale || "en"
     const { paymentMethodId, customerData, amountInCents, currency } = body
 
     console.log("[v0] Payment request:", {
@@ -71,13 +73,21 @@ export async function POST(request: NextRequest) {
 
     const currentPrices = PRICE_IDS[currencyKey]
 
-    console.log("[v0] Creating subscription with price:", currentPrices.subscription)
-    const subscription = await stripe.subscriptions.create({
+    console.log("[v0] Creating app subscription with price:", currentPrices.subscription_app)
+    const appSubscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [{ price: currentPrices.subscription }],
+      items: [{ price: currentPrices.subscription_app }],
       trial_period_days: 29,
     })
-    console.log("[v0] Subscription created:", subscription.id, "Status:", subscription.status)
+    console.log("[v0] App subscription created:", appSubscription.id, "Status:", appSubscription.status)
+
+    console.log("[v0] Creating digital course subscription with price:", currentPrices.subscription_digital)
+    const digitalSubscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: currentPrices.subscription_digital }],
+      trial_period_days: 1,
+    })
+    console.log("[v0] Digital subscription created:", digitalSubscription.id, "Status:", digitalSubscription.status)
 
     if (amountInCents > 0) {
       console.log("[v0] Creating one-time payment:", amountInCents, currency)
@@ -92,7 +102,7 @@ export async function POST(request: NextRequest) {
         description: "Versia Garden Kit - Shipping fee",
         metadata: {
           type: "one-time-shipping",
-          subscription_id: subscription.id,
+          subscription_id: appSubscription.id,
         },
       })
       console.log("[v0] PaymentIntent created:", paymentIntent.id, "Status:", paymentIntent.status)
@@ -127,9 +137,22 @@ export async function POST(request: NextRequest) {
             type: "main",
             price: amountInCents,
           },
+          {
+            name: "Versia App Subscription",
+            type: "app_sub",
+            price: 0,
+            trial: "29 days",
+          },
+          {
+            name: "Gardening Course",
+            type: "digital_sub",
+            price: 0,
+            trial: "1 day",
+          },
         ],
         total_amount_cents: amountInCents,
         currency: currency,
+        upsell1_status: "accepted",
       })
 
       if (supabaseError) {
@@ -141,8 +164,8 @@ export async function POST(request: NextRequest) {
       console.error("[v0] Failed to log order to Supabase:", dbError)
     }
 
-    const upsellPath = locale === 'it' ? '/it/upsell1' : '/upsell1'
-    const redirectUrl = `${appUrl}${upsellPath}?email=${encodeURIComponent(customerData.email)}&customer=${customer.id}`
+    const upsellPath = locale === "it" ? "/it/upsell2" : "/upsell2"
+    const redirectUrl = `${appUrl}${upsellPath}?email=${encodeURIComponent(customerData.email)}&customer=${customer.id}&upsell1_accepted=true`
     console.log("[v0] Success! Redirecting to:", redirectUrl)
 
     return NextResponse.json({
@@ -151,7 +174,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error: any) {
     console.error("[v0] Stripe payment error:", error)
-    
+
     const errorMap: Record<string, { en: string; it: string }> = {
       card_declined: {
         en: "Your card was declined.",
@@ -184,7 +207,7 @@ export async function POST(request: NextRequest) {
       it: "Si è verificato un errore durante l'elaborazione del pagamento.",
     }
 
-    const currentLocale = (locale === 'it' ? 'it' : 'en') as 'it' | 'en'
+    const currentLocale = (locale === "it" ? "it" : "en") as "it" | "en"
     let errorMessage = defaultError[currentLocale]
 
     if (error?.code && errorMap[error.code]) {

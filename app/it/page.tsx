@@ -12,6 +12,7 @@ import { CustomerReviewsSection } from "@/components/it/customer-reviews-section
 import { TestimonialsSection } from "@/components/it/testimonials-section"
 import { OurStorySection } from "@/components/it/our-story-section"
 import { Footer } from "@/components/it/footer"
+import { FaqSection } from "@/components/it/faq-section"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function ItalianPage() {
         <CustomerReviewsSection />
         <TestimonialsSection />
         <OurStorySection />
+        <FaqSection />
       </main>
       <Footer />
     </>

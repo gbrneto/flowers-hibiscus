@@ -1,8 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel"
+import { cn } from "@/lib/utils"
 
 const reviews = [
   {
@@ -53,27 +60,22 @@ const reviews = [
 ]
 
 export function CustomerReviewsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  
-  const itemsPerPage = 3
-  const totalPages = Math.ceil(reviews.length / itemsPerPage)
-  
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalPages)
-  }
-  
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages)
-  }
-  
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
-  
-  const visibleReviews = reviews.slice(
-    currentIndex * itemsPerPage,
-    (currentIndex + 1) * itemsPerPage
-  )
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
   
   return (
     <section className="py-16 px-4 bg-gray-50">
@@ -82,59 +84,57 @@ export function CustomerReviewsSection() {
           Approved by our customers
         </h2>
         
-        <div className="relative">
-          {/* Navigation Buttons */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-white shadow-lg hover:bg-gray-100"
-            onClick={prevSlide}
-            aria-label="Previous reviews"
+        <div className="relative px-4 md:px-12">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
           >
-            <ChevronLeft className="h-6 w-6" />
-          </Button>
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-white shadow-lg hover:bg-gray-100"
-            onClick={nextSlide}
-            aria-label="Next reviews"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </Button>
-          
-          {/* Reviews Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-16">
-            {visibleReviews.map((review) => (
-              <div key={review.id} className="flex flex-col">
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-4">
-                  <img
-                    src={review.image || "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Gemini_Generated_Image_u2en2du2en2du2en.png"}
-                    alt={`Customer review ${review.id}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm flex-1">
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    {review.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+            <CarouselContent className="-ml-4">
+              {reviews.map((review) => (
+                <CarouselItem key={review.id} className="pl-4 basis-full md:basis-1/3">
+                  <div className="flex flex-col h-full">
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-4">
+                      <img
+                        src={review.image || "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Gemini_Generated_Image_u2en2du2en2du2en.png"}
+                        alt={`Customer review ${review.id}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-sm flex-1">
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {review.text}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-12 h-12 w-12" />
+            <CarouselNext className="hidden md:flex -right-12 h-12 w-12" />
+            
+            {/* Mobile Navigation Buttons - Visible only on mobile */}
+            <div className="flex md:hidden justify-between mt-4 gap-4">
+              <CarouselPrevious className="static translate-y-0 h-12 w-12" />
+              <CarouselNext className="static translate-y-0 h-12 w-12" />
+            </div>
+          </Carousel>
           
           {/* Pagination Dots */}
           <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: totalPages }).map((_, index) => (
+            {Array.from({ length: count }).map((_, index) => (
               <button
                 key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'w-8 bg-gray-800'
-                    : 'w-2 bg-gray-300 hover:bg-gray-400'
-                }`}
+                onClick={() => api?.scrollTo(index)}
+                className={cn(
+                  "h-2 rounded-full transition-all",
+                  index === current - 1
+                    ? "w-8 bg-gray-800"
+                    : "w-2 bg-gray-300 hover:bg-gray-400"
+                )}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

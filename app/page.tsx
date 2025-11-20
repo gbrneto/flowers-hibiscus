@@ -12,6 +12,7 @@ import { CustomerReviewsSection } from "@/components/customer-reviews-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { OurStorySection } from "@/components/our-story-section"
 import { Footer } from "@/components/footer"
+import { FaqSection } from "@/components/faq-section"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function Home() {
         <CustomerReviewsSection />
         <TestimonialsSection />
         <OurStorySection />
+        <FaqSection />
       </main>
       <Footer />
     </>

@@ -10,27 +10,32 @@ import { UpsellModal } from "@/components/upsell-modal"
 import { useCart } from "@/lib/cart-context"
 
 const PRODUCT_IMAGES = [
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20960.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20894.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20vermelho.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20amarelo.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20rosa%201.1.png",
   "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/Hb%20roxo%201.1.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20957.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20958.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20959.png",
+  "https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/image%20961.png",
 ]
 
 const COLOR_IMAGE_MAP: Record<string, number> = {
-  "Mixed Colours": 0, // image 894.png
-  Red: 1, // Hb vermelho.png
-  Yellow: 2, // Hb amarelo.png
-  Pink: 3, // Hb rosa 1.1.png
-  Purple: 4, // Hb roxo 1.1.png
+  "Mixed Colours": 0, // image 960.png
+  Red: 2, // Hb vermelho.png
+  Yellow: 3, // Hb amarelo.png
+  Pink: 4, // Hb rosa 1.1.png
+  Purple: 5, // Hb roxo 1.1.png
 }
 
 const KIT_COLOR_MAP: Record<string, { color: string; imageIndex: number }> = {
   "20-seeds": { color: "Mixed Colours", imageIndex: 0 },
-  "75-seeds": { color: "Red", imageIndex: 1 },
-  "50-seeds": { color: "Yellow", imageIndex: 2 },
-  "silver-kit": { color: "Pink", imageIndex: 3 },
-  "gold-kit": { color: "Purple", imageIndex: 4 },
+  "75-seeds": { color: "Red", imageIndex: 2 },
+  "50-seeds": { color: "Yellow", imageIndex: 3 },
+  "silver-kit": { color: "Pink", imageIndex: 4 },
+  "gold-kit": { color: "Purple", imageIndex: 5 },
 }
 
 const SHOPIFY_CART_URLS: Record<string, Record<string, string>> = {
