@@ -1,22 +1,26 @@
-import { Flower2 } from 'lucide-react'
+import { Flower2 } from "lucide-react"
 
 export function FeaturesSection() {
   const features = [
     {
       title: "Fioriture Spettacolari",
-      description: "Ogni fiore sboccia con molteplici strati di petali ondulati, creando un effetto voluminoso e scenografico unico nel suo genere.",
+      description:
+        "Ogni fiore sboccia con molteplici strati di petali ondulati, creando un effetto voluminoso e scenografico unico nel suo genere.",
     },
     {
       title: "Fioritura Prolungata",
-      description: "Un'esplosione di colori che ti accompagna senza sosta dall'inizio dell'estate fino ai primi freschi autunnali.",
+      description:
+        "Un'esplosione di colori che ti accompagna senza sosta dall'inizio dell'estate fino ai primi freschi autunnali.",
     },
     {
       title: "Ideale per Ogni Spazio",
-      description: "In vaso sul terrazzo, in aiuola o lungo i vialetti: queste piante donano splendore ovunque decidano di mettere radici.",
+      description:
+        "In vaso sul terrazzo, in aiuola o lungo i vialetti: queste piante donano splendore ovunque decidano di mettere radici.",
     },
     {
       title: "Un Richiamo per la Natura",
-      description: "Queste meraviglie tropicali attirano farfalle e impollinatori, portando vita, movimento e allegria nel tuo angolo verde.",
+      description:
+        "Queste meraviglie tropicali attirano farfalle e impollinatori, portando vita, movimento e allegria nel tuo angolo verde.",
     },
   ]
 
@@ -28,7 +32,7 @@ export function FeaturesSection() {
           <div className="mb-8 md:mb-12 max-w-4xl mx-auto">
             <video autoPlay loop muted playsInline className="w-full rounded-lg">
               <source
-                src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Sementes/0922%282%29.mp4"
+                src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/video%20hibiscus%20pg.mp4"
                 type="video/mp4"
               />
               Il tuo browser non supporta il tag video.
@@ -40,7 +44,8 @@ export function FeaturesSection() {
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto text-pretty">
             Dona un tocco esotico e lussureggiante ai tuoi spazi con i nostri{" "}
-            <span className="font-semibold text-foreground">Ibischi Doppi</span>. Famosi per i loro fiori ricchi, strutturati e dai colori vibranti, regalano uno spettacolo naturale che lascia senza fiato.
+            <span className="font-semibold text-foreground">Ibischi Doppi</span>. Famosi per i loro fiori ricchi,
+            strutturati e dai colori vibranti, regalano uno spettacolo naturale che lascia senza fiato.
           </p>
         </div>
 

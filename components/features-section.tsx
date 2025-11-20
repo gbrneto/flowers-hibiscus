@@ -28,7 +28,7 @@ export function FeaturesSection() {
           <div className="mb-8 md:mb-12 max-w-4xl mx-auto">
             <video autoPlay loop muted playsInline className="w-full rounded-lg">
               <source
-                src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Sementes/0922%282%29.mp4"
+                src="https://dxy4adpuoflk7uxq.public.blob.vercel-storage.com/Versia%20Garden/Kit%20hibiscus/video%20hibiscus%20pg.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -40,8 +40,8 @@ export function FeaturesSection() {
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto text-pretty">
             Bring a lush, exotic vibe to your garden with our{" "}
-            <span className="font-semibold text-foreground">Double Hibiscus</span> Starter Plants. Known for their full, layered
-            blooms and vibrant colors, these flowers create a striking display that's impossible to ignore.
+            <span className="font-semibold text-foreground">Double Hibiscus</span> Starter Plants. Known for their full,
+            layered blooms and vibrant colors, these flowers create a striking display that's impossible to ignore.
           </p>
         </div>
 
